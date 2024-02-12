@@ -41,4 +41,37 @@ test('HashMap set() function will create linked list if more than 1 key value pa
     expect(newHashMap.buckets[index].key).toBe('AaBB');
     expect(newHashMap.buckets[index].next.key).toBe('BBAa');
     expect(newHashMap.buckets[index].next.next.key).toBe('AaAa');
+}),
+
+test('HashMap get() function will return null if there is no node at specified index', () => {
+    const newHashMap = new HashMap();
+ 
+    expect(newHashMap.get('random')).toBeNull();
+}),
+
+test('HashMap get() function will return null if the input key doesnt exist at specified index', () => {
+    const newHashMap = new HashMap();
+    newHashMap.set('AaBB', 'initial value'); 
+
+    expect(newHashMap.get('BBAa')).toBeNull();
+}),
+
+test('HashMap get() function will return the node if input key matches bucket key', () => {
+    const newHashMap = new HashMap();
+    newHashMap.set('AaBB', 'initial value');
+    const node = newHashMap.get('AaBB');
+
+    expect(node).not.toBeNull();
+    expect(node.key).toBe('AaBB');
+}),
+
+test('HashMap get() function will return the correct node if a bucket has multiple key value pairs', () => {
+    const newHashMap = new HashMap();
+    newHashMap.set('AaBB', 'initial value');
+    newHashMap.set('BBAa', 'initial value');
+    newHashMap.set('AaAa', 'initial value');
+    const node = newHashMap.get('AaAa');
+
+    expect(node).not.toBeNull();
+    expect(node.key).toBe('AaAa');
 })

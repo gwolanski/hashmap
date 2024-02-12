@@ -56,6 +56,28 @@ class HashMap {
             } 
         }
     }
+
+    get(key) {
+        const index = this.hash(key);
+        let currentNode = this.buckets[index];
+
+        if (!currentNode) {
+            return null;
+        } else {
+            while (currentNode) {
+                if (currentNode.key === key) {
+                    return currentNode;
+                } else {
+                    if (!currentNode.next) {
+                        return null;
+                    } else {
+                        currentNode = currentNode.next;
+                    }
+                }
+            }
+            
+        }
+    }
 }
 
 module.exports = {
