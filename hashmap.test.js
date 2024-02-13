@@ -74,4 +74,30 @@ test('HashMap get() function will return the correct node if a bucket has multip
 
     expect(node).not.toBeNull();
     expect(node.key).toBe('AaAa');
+}),
+
+test('HashMap has() function will return true if a specified key is in the hash map', () => {
+    const newHashMap = new HashMap();
+    newHashMap.set('AaBB', 'initial value');
+    
+    expect(newHashMap.has('AaBB')).toBeTruthy();
+}), 
+
+test('HashMap has() function will return true if a specified key is in the hash map when there are multiple keys in a bucket', () => {
+    const newHashMap = new HashMap();
+    newHashMap.set('AaBB', 'initial value');
+    newHashMap.set('BBAa', 'initial value');
+    newHashMap.set('AaAa', 'initial value');
+    
+    expect(newHashMap.has('AaAa')).toBeTruthy();
+    expect(newHashMap.has('BBAa')).toBeTruthy();
+    expect(newHashMap.has('AaBB')).toBeTruthy();
+}),
+
+test('HashMap has() function will return false if a specified key is not in the hash map', () => {
+    const newHashMap = new HashMap();
+    newHashMap.set('AaBB', 'initial value');
+    
+    expect(newHashMap.has('dog')).toBeFalsy();
+    expect(newHashMap.has('AaAa')).toBeFalsy();
 })
