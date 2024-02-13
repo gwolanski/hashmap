@@ -31,7 +31,6 @@ class HashMap {
         //add logic to check load factor and grow if necessary 
         
         const index = this.hash(key);
-        console.log(`key ${key}, index ${index}`)
         const newNode = new Node(key, value);
 
         if (index < 0 || index >= this.bucketCapacity) {
@@ -52,7 +51,6 @@ class HashMap {
                     currentNode = currentNode.next;
                 }
                 currentNode.next = newNode;
-                console.log('currentNode.next: ' + currentNode.next)
             } 
         }
     }
@@ -80,12 +78,33 @@ class HashMap {
     }
 
     has(key) {
-        const doesKeyExistInHashMap = this.get(key);
+        const node = this.get(key);
 
-        if (doesKeyExistInHashMap) {
-            return true;
-        } else {
+        return node !== null;
+    }
+
+    remove(key) {
+        const isKeyInHashMap = this.has(key);
+
+        if (!isKeyInHashMap) {
             return false;
+        } else {
+            const index = this.hash(key);
+            let currentNode = this.buckets[index];
+            let previousNode = null;
+            
+            while (currentNode) {
+                if (currentNode.key === key) {
+                    if (previousNode === null) {
+                        currentNode = currentNode.next;
+                    } else {
+                        previousNode.next = currentNode.next;
+                    }
+                    return true;
+                }
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+            }
         }
     }
 }
