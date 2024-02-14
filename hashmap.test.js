@@ -140,12 +140,41 @@ test('HashMap remove() function removes specified key', () => {
     newHashMap.set('cactus', 'initial value');
     newHashMap.set('AaBB', 'initial value');
     newHashMap.set('BBAa', 'initial value');
+    newHashMap.set('yellow');
 
     newHashMap.remove('BBAa');
     newHashMap.remove('cactus');
     newHashMap.remove('AaBB');
+    newHashMap.remove('yellow');
 
     expect(newHashMap.has('BBAa')).toBeFalsy;
     expect(newHashMap.has('cactus')).toBeFalsy;
     expect(newHashMap.has('AaBB')).toBeFalsy;
+    expect(newHashMap.has('yellow')).toBeFalsy;
+}),
+
+test('HashMap length() function correctly returns # of set keys in hashmap', () => {
+    const newHashMap = new HashMap();    
+    
+    newHashMap.set('cactus', 'initial value');
+    newHashMap.set('AaBB', 'initial value');
+    newHashMap.set('BBAa', 'initial value');
+    newHashMap.set('yellow', 'initial value');
+
+    expect(newHashMap.length()).toEqual(4);
+}),
+
+test('HashMap length() correclty returns # of keys after one or more keys removed', () => {
+    const newHashMap = new HashMap();    
+    
+    newHashMap.set('cactus', 'initial value');
+    newHashMap.set('AaBB', 'initial value');
+    newHashMap.set('BBAa', 'initial value');
+    newHashMap.set('yellow', 'initial value');
+
+    newHashMap.remove('yellow');
+    newHashMap.remove('BBAa');
+    newHashMap.remove('cactus');
+
+    expect(newHashMap.length()).toEqual(1);
 })

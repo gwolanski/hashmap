@@ -32,6 +32,7 @@ class HashMap {
         
         const index = this.hash(key);
         const newNode = new Node(key, value);
+        console.log(`${key} ${index}`)
 
         if (index < 0 || index >= this.bucketCapacity) {
             throw new Error('Trying to access index out of bounds');
@@ -79,7 +80,7 @@ class HashMap {
 
     has(key) {
         const node = this.get(key);
-
+        console.log('this.buckets: ', this.buckets)
         return node !== null;
     }
 
@@ -90,13 +91,14 @@ class HashMap {
             return false;
         } else {
             const index = this.hash(key);
+            console.log(`${key} ${index}`)
             let currentNode = this.buckets[index];
             let previousNode = null;
-            
+
             while (currentNode) {
                 if (currentNode.key === key) {
                     if (previousNode === null) {
-                        currentNode = currentNode.next;
+                        this.buckets[index] = currentNode.next;
                     } else {
                         previousNode.next = currentNode.next;
                     }
@@ -106,6 +108,25 @@ class HashMap {
                 currentNode = currentNode.next;
             }
         }
+    }
+
+    length() {
+        let count = 0;
+        console.log(this.buckets);
+        for (const bucket of this.buckets) {
+            if (bucket !== null && bucket !== undefined) {
+                let currentNode = bucket;
+                while (currentNode !== null) {
+                    count++;
+                    if (!currentNode.next) {
+                        break;
+                    } else {
+                        currentNode = currentNode.next;
+                    }
+                }
+            }
+        }
+        return count;
     }
 }
 
