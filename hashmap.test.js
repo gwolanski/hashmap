@@ -202,15 +202,22 @@ test('HashMap keys() function returns all keys in the hashmap', () => {
     newHashMap.set('BBAa', 'initial value');
     newHashMap.set('yellow', 'initial value');
 
-    const hasKey1 = newHashMap.buckets.some(obj => 'BBAa' in obj);
-    const hasKey2 = newHashMap.buckets.some(obj => 'yellow' in obj);
-    const hasKey3 = newHashMap.buckets.some(obj => 'AaBB' in obj);
-    const hasKey4 = newHashMap.buckets.some(obj => 'cactus' in obj);
-    const hasKey5 = newHashMap.buckets.some(obj => 'smoke' in obj);
+    expect(newHashMap.keys()).toContain('BBAa');
+    expect(newHashMap.keys()).toContain('yellow');
+    expect(newHashMap.keys()).toContain('AaBB');
+    expect(newHashMap.keys()).toContain('cactus');
+}),
 
-    expect(hasKey1).toBeTruthy;
-    expect(hasKey2).toBeTruthy;
-    expect(hasKey3).toBeTruthy;
-    expect(hasKey4).toBeTruthy;
-    expect(hasKey5).toBeFalsy;
+test('HashMap values() function returns all values in the hashmap', () => {
+    const newHashMap = new HashMap();    
+    
+    newHashMap.set('cactus', 'initial value');
+    newHashMap.set('AaBB', 'another value');
+    newHashMap.set('BBAa', 'value');
+    newHashMap.set('yellow', 'something');
+
+    expect(newHashMap.values()).toContain('initial value');
+    expect(newHashMap.values()).toContain('another value');
+    expect(newHashMap.values()).toContain('value');
+    expect(newHashMap.values()).toContain('something');
 })
