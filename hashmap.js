@@ -91,7 +91,6 @@ class HashMap {
             return false;
         } else {
             const index = this.hash(key);
-            console.log(`${key} ${index}`)
             let currentNode = this.buckets[index];
             let previousNode = null;
 
@@ -112,7 +111,6 @@ class HashMap {
 
     length() {
         let count = 0;
-        console.log(this.buckets);
         for (const bucket of this.buckets) {
             if (bucket !== null && bucket !== undefined) {
                 let currentNode = bucket;
@@ -128,32 +126,33 @@ class HashMap {
         }
         return count;
     }
+
+    clear() {
+        this.buckets = [];
+    }
+
+    keys() {
+        let keys = [];
+
+        for (const bucket of this.buckets) {
+            if (bucket !== null && bucket !== undefined) {
+                let currentNode = bucket;
+                while (currentNode !== null) {
+                    keys.push(currentNode);
+                    if (!currentNode.next) {
+                        break;
+                    } else {
+                        currentNode = currentNode.next;
+                    }
+                }
+            }
+        }
+        console.log('keys: ', keys);
+        return keys;
+    }
 }
 
 module.exports = {
     HashMap,
     Node
 }
-
-//carlos 
-//C:  (31 * 0 + 67) % 16 = 3
-//a: (31* 3 + 97) % 16 = 14
-//r: (31 * 14 + 114) % 16 = 4
-//l: (31 * 4 + 108) % 16 = 8
-//o: (31 * 8 + 111) % 16 = 7
-//s: (31 * 7 + 115) % 16 = 12
-
-//banana
-//b: (31 * 0 + 98) % 16 = 2
-//a: (31 * 2 + 97) % 16 = 15
-//n: (31 * 5 + 110) % 16 = 9
-//a: (31 * 9 + 97) % 16 = 8
-//n: (31 * 8 + 110) % 16 = 6
-//a: (31 * 6 + 97) % 16 = 11
-
-//open 
-
-//o: (31 * 0 + 111) % 16 = 15
-//p: 
-//e: 
-//n: 

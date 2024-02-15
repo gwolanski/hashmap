@@ -164,7 +164,7 @@ test('HashMap length() function correctly returns # of set keys in hashmap', () 
     expect(newHashMap.length()).toEqual(4);
 }),
 
-test('HashMap length() correclty returns # of keys after one or more keys removed', () => {
+test('HashMap length() function correclty returns # of keys after one or more keys removed', () => {
     const newHashMap = new HashMap();    
     
     newHashMap.set('cactus', 'initial value');
@@ -177,4 +177,40 @@ test('HashMap length() correclty returns # of keys after one or more keys remove
     newHashMap.remove('cactus');
 
     expect(newHashMap.length()).toEqual(1);
+}),
+
+test('HashMap clear() function removes all entries in the hashmap', () => {
+    const newHashMap = new HashMap();    
+    
+    newHashMap.set('cactus', 'initial value');
+    newHashMap.set('AaBB', 'initial value');
+    newHashMap.set('BBAa', 'initial value');
+    newHashMap.set('yellow', 'initial value');
+
+    newHashMap.clear();
+
+    expect(newHashMap.length()).toEqual(0);
+    expect(newHashMap.has('AaBB')).toBeFalsy;
+    expect(newHashMap.get('yellow')).toBeNull;
+}),
+
+test('HashMap keys() function returns all keys in the hashmap', () => {
+    const newHashMap = new HashMap();    
+    
+    newHashMap.set('cactus', 'initial value');
+    newHashMap.set('AaBB', 'initial value');
+    newHashMap.set('BBAa', 'initial value');
+    newHashMap.set('yellow', 'initial value');
+
+    const hasKey1 = newHashMap.buckets.some(obj => 'BBAa' in obj);
+    const hasKey2 = newHashMap.buckets.some(obj => 'yellow' in obj);
+    const hasKey3 = newHashMap.buckets.some(obj => 'AaBB' in obj);
+    const hasKey4 = newHashMap.buckets.some(obj => 'cactus' in obj);
+    const hasKey5 = newHashMap.buckets.some(obj => 'smoke' in obj);
+
+    expect(hasKey1).toBeTruthy;
+    expect(hasKey2).toBeTruthy;
+    expect(hasKey3).toBeTruthy;
+    expect(hasKey4).toBeTruthy;
+    expect(hasKey5).toBeFalsy;
 })
