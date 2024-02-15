@@ -220,4 +220,17 @@ test('HashMap values() function returns all values in the hashmap', () => {
     expect(newHashMap.values()).toContain('another value');
     expect(newHashMap.values()).toContain('value');
     expect(newHashMap.values()).toContain('something');
+}),
+
+test('HashMap entries() function returns all key value pairs in the hashmap', () => {
+    const newHashMap = new HashMap();    
+    
+    newHashMap.set('cactus', 'initial value');
+    newHashMap.set('AaBB', 'another value');
+    newHashMap.set('BBAa', 'value');
+    newHashMap.set('yellow', 'something');
+
+    expect(newHashMap.entries().includes(['cactus','initial value'])).toBeTruthy;
+    expect(newHashMap.entries().includes(['BBAa', 'value'])).toBeTruthy;
+    expect(newHashMap.entries().includes(['random','test'])).toBeFalsy;
 })

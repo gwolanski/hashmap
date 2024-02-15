@@ -79,7 +79,6 @@ class HashMap {
 
     has(key) {
         const node = this.get(key);
-        console.log('this.buckets: ', this.buckets)
         return node !== null;
     }
 
@@ -166,6 +165,25 @@ class HashMap {
             }
         }
         return values;
+    }
+
+    entries() {
+        let keyValuePairs = [];
+
+        for (const bucket of this.buckets) {
+            if (bucket !== null && bucket !== undefined) {
+                let currentNode = bucket;
+                while (currentNode !== null) {
+                    keyValuePairs.push([`${currentNode.key}`, `${currentNode.value}`]);
+                    if (!currentNode.next) {
+                        break;
+                    } else {
+                        currentNode = currentNode.next;
+                    }
+                }
+            }
+        }
+        return keyValuePairs;
     }
 }
 
