@@ -233,4 +233,24 @@ test('HashMap entries() function returns all key value pairs in the hashmap', ()
     expect(newHashMap.entries().includes(['cactus','initial value'])).toBeTruthy;
     expect(newHashMap.entries().includes(['BBAa', 'value'])).toBeTruthy;
     expect(newHashMap.entries().includes(['random','test'])).toBeFalsy;
-})
+}),
+
+test('HashMap should resize when load factor is exceeded', () => {
+    const newHashMap = new HashMap();
+    //setting small capacity and load factor for testing purposes
+    newHashMap.bucketCapacity = 4;
+    newHashMap.loadFactor = 0.5; 
+
+    newHashMap.set('key1', 'value1');
+    newHashMap.set('key2', 'value2');
+
+    expect(newHashMap.bucketCapacity).toBe(4);
+
+    newHashMap.set('key3', 'value3');
+
+    expect(newHashMap.bucketCapacity).toBe(8);
+
+    expect(newHashMap.entries().includes(['key1', 'value1'])).toBeTruthy;
+    expect(newHashMap.entries().includes(['key2', 'value2'])).toBeTruthy;
+    expect(newHashMap.entries().includes(['key3', 'value3'])).toBeTruthy;
+});

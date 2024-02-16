@@ -28,8 +28,10 @@ class HashMap {
       }
     
     set(key, value) {
-        //add logic to check load factor and grow if necessary 
-        
+        if (this.isLoadFactorExceeded()) {
+            this.resize();
+        }
+
         const index = this.hash(key);
         const newNode = new Node(key, value);
 
@@ -184,6 +186,38 @@ class HashMap {
             }
         }
         return keyValuePairs;
+    }
+
+    isLoadFactorExceeded() {
+        const currentNumberOfObjects = this.length() + 1;
+        const maxNumberOfObjects = this.loadFactor * this.bucketCapacity;
+        return (currentNumberOfObjects > maxNumberOfObjects);
+    }
+
+    resize() {
+        const currentBuckets = this.buckets;
+        const newCapacity = this.bucketCapacity * 2;
+        this.clear();
+
+        currentBuckets.forEach(bucket => {
+            let currentNode = bucket;
+            while (currentNode) {
+                const newIndex = this.hash(currentNode.key, newCapacity);
+                const newNode = new Node(currentNode.key, currentNode.value);
+
+                if (!this.buckets[newIndex]) {
+                    this.buckets[newIndex] = newNode;
+                } else {
+                    let currentTail = this.buckets[newIndex];
+                    while (currentTail.next) {
+                        currentTail = currentTail.next;
+                    }
+                    currentTail.next = newNode;
+                }
+                currentNode = currentNode.next;
+            }
+        });
+        this.bucketCapacity = newCapacity;
     }
 }
 
