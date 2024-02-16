@@ -1,1 +1,7 @@
-# hashmap
+This project was done as a part of The Odin Project curriculum. The assignment can be found at the following link: https://www.theodinproject.com/lessons/javascript-hashmap#project-solution
+
+The purpose of this project was to help familiarize me with using hash maps. Putting my recently acquired hash map knowledge to the test proved to be challenging to start. However, once I got the initial basics down, continuing through the various functions became increasingly smooth. As usual, actively putting this learned material to use provided me with substantially more growth when compared with the curriculum readings. I feel much more comfortable with hash maps as a result of this project and look forward to using them in future projects. 
+
+Additionally, I honed in on my Jest testing skills throughout this project as a way to confirm my functions were working as intended. I created tests as I worked through each of the HashMap functions, only moving on to the next function once all my tests passed. Testing has proven to be a very valuable resource when it comes to building logic. I'm eager to enhance my knowledge of testing to see all the different ways I can incorporate it into future projects. 
+
+The primary JavaScript functionality used in this project is as follows: hash maps, testing (Jest), object-oriented programming, classes, linked lists, arrays, for loops, and while loops.
